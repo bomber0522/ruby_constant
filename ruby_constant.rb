@@ -32,3 +32,25 @@ end
 #=> dynamic constant assignment
 #   DEFAULT_PRICE = 0
 #                  ^
+
+# --------------------------------------------------------------------------------
+
+# Ruby定数はそのままの状態では定数をいろいろと変更できてしまう。
+# 定数には再代入が可能。
+# 定数の値を後から書き換えも可能。
+
+class Buz
+  DEFAULT_PRICE = 0
+  # 再代入して定数の値を書き換え
+  DEFAULT_PRICE = 100
+end
+#=> already initialized constant Product::DEFAULT_PRICE
+
+# 再代入後の値が返る
+p Buz::DEFAULT_PRICE #=> 100
+
+# クラスの外部からでも再代入が可能
+Buz::DEFAULT_PRICE = 300
+#=> warning: already initialized constant Product::DEFAULT_PRICE
+
+p Buz::DEFAULT_PRICE #=> 300
