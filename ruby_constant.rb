@@ -8,4 +8,16 @@ class Hoge
   DEFAULT_COUNT = 0
 end
 
-p Hoge::DEFAULT_COUNT #=> 0 
+p Hoge::DEFAULT_COUNT #=> 0
+
+# private_constantで外部から参照できなくなる(Rubyの場合、滅多にprivateにすることはない)。
+
+class Foo
+  DEFAULT_COUNT = 0
+  # 定数をprivateにする
+  private_constant :DEFAULT_COUNT
+end
+
+# privateにした定数をクラスの外部から参照
+p Foo::DEFAULT_COUNT
+#=> private constant Foo::DEFAULT_COUNT referenced (NameError)
