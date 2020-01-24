@@ -21,3 +21,14 @@ end
 # privateにした定数をクラスの外部から参照
 p Foo::DEFAULT_COUNT
 #=> private constant Foo::DEFAULT_COUNT referenced (NameError)
+
+class Bar
+  def fuga
+    # メソッドの内部で定数を作成
+    DEFAULT_STATUS = true
+  end
+end
+# 構文エラーになる
+#=> dynamic constant assignment
+#   DEFAULT_PRICE = 0
+#                  ^
