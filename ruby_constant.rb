@@ -54,3 +54,29 @@ Buz::DEFAULT_PRICE = 300
 #=> warning: already initialized constant Product::DEFAULT_PRICE
 
 p Buz::DEFAULT_PRICE #=> 300
+
+# -------------------------------------------------------------------------------
+
+# クラスの外部からの再代入を防ぎたい場合はクラスをfeeze(凍結)する。
+# そうするとクラスは変更を受け付けなくなる。
+
+class Hoge
+  DEFAULT_PRICE = 100
+end
+
+# クラスを凍結する
+Hoge.freeze
+
+# freezeすると変更できなくなる
+Hoge::DEFAULT_PRICE = 2000 #=> can't modify frozen #<Class:Hoge> (RuntimeError)
+
+# だけど、Rubyの場合、普通は定数を上書きする人はいない、わざわざクラスをfreezeさせることは少ない。
+# feezeを呼べば再代入を防ぐことができるが、
+# そのあとでメソッドの定義もできなくなってしまうので、freezeを呼ぶことはまずない。
+
+class Piyo
+  DEFAULT_PRICE = 0
+  # freezeすれば再代入を防止できるが、デメリットの方か大きいので普通はしない
+  freeze
+  DEFAULT_PRICE = 1000 #=> can't modify frozen #<Class:Piyo> (RuntimeError)
+end
